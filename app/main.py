@@ -88,8 +88,8 @@ def passing_info():
 # "argv" is the command line arguments that are passed when running the following command: python3 main.py FQDN_OF_PRIMARY RBAC_TOKEN
 # This can be ran from the /dashboard_pe_status/app/ folder: python3 main.py $(puppet config print certname) $(puppet-access show)
 def update():
-    host = str(sys.argv[1])
-    url = "https://{}:8143/orchestrator/v1/command/plan_run".format(host)
+    host = host = "https://" + str(sys.argv[1]) + ":8143"
+    url = "{}/orchestrator/v1/command/plan_run".format(host)
     token = str(sys.argv[2])
     headers = {'X-Authentication': token, 'Content-Type': 'application/json'}
     response = requests.post(url, headers=headers, data='{ "plan_name" : "pe_status_check::infra_summary", "description" : "API call from bart", "params" : { } }', verify=False)
@@ -108,4 +108,4 @@ def update():
     return data
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(host='0.0.0.0')
