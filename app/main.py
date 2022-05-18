@@ -92,7 +92,7 @@ def update():
     url = "{}/orchestrator/v1/command/plan_run".format(host)
     token = str(sys.argv[2])
     headers = {'X-Authentication': token, 'Content-Type': 'application/json'}
-    response = requests.post(url, headers=headers, data='{ "plan_name" : "pe_status_check::infra_summary", "description" : "API call from bart", "params" : { } }', verify=False)
+    response = requests.post(url, headers=headers, data='{ "plan_name" : "pe_status_check::infra_summary", "description" : "API call from dashboard_pe_status_check", "params" : { } }', verify=False)
 
     url = "{}/orchestrator/v1/plan_jobs/{}/events".format(host, response.json()["name"])
     is_finished = False
