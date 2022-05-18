@@ -21,8 +21,8 @@ pip3 install -r requirements.txt
 If your Python version doesn't meet the requirements, the two main dependencies are:
 
 ```
-pip install Flask
-pip install requests
+pip3 install Flask
+pip3 install requests
 ```
 
 ## Usage
