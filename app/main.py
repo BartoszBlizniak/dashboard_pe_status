@@ -24,8 +24,15 @@ def all():
 @app.route("/failing")
 def failing():
     failed_info = failing_info()
-    data = parse()
-    return render_template('failing.html',  failing_nodes_info=failed_info)
+    total = show_total("failing_node_count")
+    return render_template('failing.html',  failing_nodes_info=failed_info, total=total)
+
+# Passing nodes only
+@app.route("/passing")
+def passing():
+    passed_info = passing_info()
+    total = show_total("passing_node_count")
+    return render_template('passing.html', passing_nodes_info=passed_info, total=total)
 
 # Failing nodes information
 @app.route("/failed_node_info/<string:node>", methods=['GET'])
@@ -83,6 +90,12 @@ def passing_info():
         if filter_node in passing:
             nodes_with_passing[filter_node] = filter_nodes[filter_node]
     return nodes_with_passing   
+
+# Show server total, passing nodes, failing nodes
+def show_total(type):
+    data = parse()
+    total = data[type]
+    return total
 
 # Send a request to the orchestrator to run pe_status_check::infra_summary and wait for the data to be returned
 # "argv" is the command line arguments that are passed when running the following command: python3 main.py FQDN_OF_PRIMARY RBAC_TOKEN

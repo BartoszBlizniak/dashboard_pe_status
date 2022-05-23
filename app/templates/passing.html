@@ -10,7 +10,7 @@
         <div class="left-bar"><span class="fa fa-cloud-download"></span>
             <div class="menu-group"> <span class="fa"><a class="linker" href="{{ url_for('all') }}">Home</a></span>
             </div>
-            <div class="menu-group"> <span class="fa"><a class="linker" href="{{ url_for('passing') }}">Passing</a></span>
+            <div class="menu-group"> <span class="fa"><a class="linker" href="{{ url_for('failing') }}">Failing</a></span>
             </div>
         </div>
         <div class="wrapper">
@@ -22,14 +22,9 @@
             </div>
             
         <div class="grid">
-            {% for key, value in failing_nodes_info.items() %}
-            <div class="cardfail">
-                <div class="number"><span>{{ value.failed_tests_count }}</span></div>
+            {% for key, value in passing_nodes_info.items() %}
+            <div class="cardpass">
                 <div class="product-name"><span>{{ key }}</span></div>
-                <div class="overlay">
-                    <div class="detail"><span><a class="linker"
-                                href="{{ url_for('failed_node_info', node = key) }}">Details</a></span></span></div>
-                </div>
             </div>
             {% endfor %}
         </div>
